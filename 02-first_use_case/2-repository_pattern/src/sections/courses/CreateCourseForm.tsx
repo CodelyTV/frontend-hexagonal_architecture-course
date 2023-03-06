@@ -14,10 +14,10 @@ export function CreateCourseForm() {
 	const { formStatus, submitForm, resetFormStatus } = useCourseForm();
 	const [errors, setErrors] = useState(initialState);
 
-	const handleSubmit = async (ev: React.FormEvent) => {
+	const handleSubmit = (ev: React.FormEvent) => {
 		ev.preventDefault();
 
-		await submitForm(formData);
+		submitForm(formData);
 	};
 
 	switch (formStatus) {
