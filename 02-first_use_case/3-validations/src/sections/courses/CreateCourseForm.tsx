@@ -1,5 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
+import { isCourseImageUrlValid } from "../../modules/courses/domain/CourseImageUrl";
+import {
+	isCourseTitleValid,
+	TITLE_MAX_LENGTH,
+	TITLE_MIN_LENGTH,
+} from "../../modules/courses/domain/CourseTitle";
 import { Spinner } from "../shared/Spinner";
 import { FormStatus, useCourseForm } from "./useCourseForm";
 import { useCourseFormData } from "./useCourseFormData";
@@ -13,6 +19,18 @@ export function CreateCourseForm() {
 	const { formData, updateForm, resetForm } = useCourseFormData(initialState);
 	const { formStatus, submitForm, resetFormStatus } = useCourseForm();
 	const [errors, setErrors] = useState(initialState);
+
+	useEffect(() => {
+		const isTitleValid = isCourseTitleValid(formData.title);
+		const isImageUrlValid = isCourseImageUrlValid(formData.imageUrl);
+
+		setErrors({
+			title: isTitleValid
+				? ""
+				: `Title must be between ${TITLE_MIN_LENGTH} and ${TITLE_MAX_LENGTH} characters`,
+			imageUrl: isImageUrlValid ? "" : "Image url is not valid",
+		});
+	}, [formData]);
 
 	const handleSubmit = (ev: React.FormEvent) => {
 		ev.preventDefault();
