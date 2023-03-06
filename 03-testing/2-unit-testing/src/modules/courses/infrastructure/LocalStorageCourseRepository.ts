@@ -9,28 +9,30 @@ export function createLocalStorageCourseRepository(): CourseRepository {
 	};
 }
 
-function save(course: Course) {
+async function save(course: Course) {
 	const courses = getAllFromLocalStorage();
 
 	courses.set(course.id, course);
 	localStorage.setItem("courses", JSON.stringify(Array.from(courses.entries())));
+
+	await Promise.resolve();
 }
 
-function get(id: string) {
+async function get(id: string) {
 	const courses = getAllFromLocalStorage();
 	const course = courses.get(id);
 
 	if (!course) {
-		return null;
+		return Promise.resolve(null);
 	}
 
-	return course;
+	return Promise.resolve(course);
 }
 
-function getAll() {
+async function getAll() {
 	const courses = getAllFromLocalStorage();
 
-	return Array.from(courses.values());
+	return Promise.resolve(Array.from(courses.values()));
 }
 
 function getAllFromLocalStorage(): Map<string, Course> {
