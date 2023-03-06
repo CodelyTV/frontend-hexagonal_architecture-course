@@ -1,10 +1,7 @@
+import { Course } from "../../modules/courses/domain/Course";
 import styles from "./CourseCard.module.scss";
 
-export function CourseCard({
-	course,
-}: {
-	course: { id: string; title: string; imageUrl: string };
-}) {
+export function CourseCard({ course }: { course: Course }) {
 	return (
 		<div className={styles.courseCard}>
 			<img src={course.imageUrl} alt="" />
