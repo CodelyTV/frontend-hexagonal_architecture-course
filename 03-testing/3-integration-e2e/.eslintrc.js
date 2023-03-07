@@ -25,7 +25,7 @@ module.exports = {
 			plugins: ["react-app/jest"],
 		},
 		{
-			files: ["**/tests/e2e/**/*.spec.ts"],
+			files: ["**/tests/e2e-integration/**/*.spec.ts"],
 			rules: {
 				"testing-library/await-async-query": 0,
 				"@typescript-eslint/no-unsafe-argument": 0,
