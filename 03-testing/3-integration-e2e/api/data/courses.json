@@ -1,0 +1,19 @@
+{
+  "data": [
+    {
+      "id": "717f7637-a101-49e4-8e64-0db607f90b13",
+      "title": "✌️ Vue 3: Novedades aplicadas al mundo real",
+      "imageUrl": "http://placekitten.com/500/400"
+    },
+    {
+      "id": "bda475e5-73d2-4d6b-84c6-c3815fa4fdd1",
+      "title": "🐂 Makefiles",
+      "imageUrl": "http://placekitten.com/500/400"
+    },
+    {
+      "id": "1e7a1998-a83c-462c-b2ca-373932675543",
+      "title": "💻 Bash para el día a día: Scripting & Productividad",
+      "imageUrl": "http://placekitten.com/500/400"
+    }
+  ]
+}
