@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="referrer" content="no-referrer-when-downgrade" />
+    <title>Codely</title>
+    <meta name="description" content="IIFEs" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body>
+    <div class="App">
+      <h1>🍍 Codely</h1>
+      <section>
+        <h2>Current courses</h2>
+        <div id="coursesList" class="list">
+
+        </div>
+      </section>
+      <section id="order" class="form">
+        <h2>🧑‍🏫 Create new course</h2>
+
+        <form id="createCourseForm">
+          <div>
+            <label for="title">Course title</label>
+            <input
+              id="title"
+              name="title"
+              type="text"
+            />
+            <div id="titleError" style="color: tomato; display: none;">
+              Title must be between 5 and 100 characters
+            </div>
+          </div>
+          <div>
+            <label for="imageUrl">Image URL</label>
+            <input
+              id="imageUrl"
+              name="imageUrl"
+              type="text"
+            />
+            <div id="imageUrlError" style="color: tomato; display: none;">
+              Image url is not valid
+            </div>
+          </div>
+          <button type="submit">Create course</button>
+        </form>
+      </section>
+      <section id="createCourseSuccess" style="display: none">
+        <h2>🚀 Course created</h2>
+        <button id="resetFormButton">Create a new course</button>
+      </section>
+    </div>
+  </body>
+</html>
