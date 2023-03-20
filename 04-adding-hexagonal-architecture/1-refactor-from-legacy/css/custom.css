@@ -1,0 +1,21 @@
+.list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr));
+  gap: 1rem;
+}
+
+.courseCard {
+  padding: 1rem;
+  overflow: hidden;
+  background: #f3f3f3;
+
+}
+
+.courseCard__title {
+  margin-top: 0.5em;
+  font-size: 2.5rem;
+}
+
+.courseCard img {
+  margin-bottom: 0;
+}
