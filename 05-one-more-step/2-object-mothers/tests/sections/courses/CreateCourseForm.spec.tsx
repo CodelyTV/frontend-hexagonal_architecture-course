@@ -34,9 +34,7 @@ describe("CreateCourseForm component", () => {
 
 	it("displays error message if title is too short", async () => {
 		const repository = createLocalStorageCourseRepository();
-		const { title: invalidTitle } = CourseMother.create({
-			title: "Aw",
-		});
+		const { title: invalidTitle } = CourseMother.createWithTooShortTitle();
 
 		render(
 			<CoursesContextProvider repository={repository}>
@@ -54,10 +52,7 @@ describe("CreateCourseForm component", () => {
 
 	it("displays error message if title is too long", async () => {
 		const repository = createLocalStorageCourseRepository();
-		const { title: invalidTitle } = CourseMother.create({
-			title:
-				"Lorem nisi occaecat nisi reprehenderit esse proident exercitation incididunt. Consectetur occaecat duis dolor proident eu sunt officia elit eiusmod culpa commodo incididunt voluptate sit.",
-		});
+		const { title: invalidTitle } = CourseMother.createWithTooLongTitle();
 
 		render(
 			<CoursesContextProvider repository={repository}>
@@ -75,9 +70,7 @@ describe("CreateCourseForm component", () => {
 
 	it("displays error message if image url is not a valid url", async () => {
 		const repository = createLocalStorageCourseRepository();
-		const { imageUrl: invalidImageUrl } = CourseMother.create({
-			imageUrl: "not a valid url",
-		});
+		const { imageUrl: invalidImageUrl } = CourseMother.createWithInvalidImageUrl();
 
 		render(
 			<CoursesContextProvider repository={repository}>
