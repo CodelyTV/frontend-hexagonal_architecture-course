@@ -22,12 +22,12 @@ export const CoursesContextProvider = ({
 	async function create({ title, imageUrl }: { title: string; imageUrl: string }) {
 		const id = (uuidv4 as () => string)(); // TODO: check uuid types
 
-		await createCourse(repository, { id, title, imageUrl });
+		await createCourse(repository)({ id, title, imageUrl });
 		await getCourses();
 	}
 
 	async function getCourses() {
-		const courses = await getAllCourses(repository);
+		const courses = await getAllCourses(repository)();
 		setCourses(courses);
 	}
 

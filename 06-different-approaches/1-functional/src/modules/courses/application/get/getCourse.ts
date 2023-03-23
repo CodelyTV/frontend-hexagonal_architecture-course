@@ -1,9 +1,8 @@
 import { Course } from "../../domain/Course";
 import { CourseRepository } from "../../domain/CourseRepository";
 
-export async function getCourse(
-	courseRepository: CourseRepository,
-	courseId: string
-): Promise<Course | null> {
-	return courseRepository.get(courseId);
+export function getCourse(courseRepository: CourseRepository) {
+	return async function (courseId: string): Promise<Course | null> {
+		return courseRepository.get(courseId);
+	};
 }
