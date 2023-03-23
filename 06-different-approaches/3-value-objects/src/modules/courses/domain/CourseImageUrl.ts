@@ -1,3 +1,5 @@
+export type CourseImageUrl = string;
+
 export function isCourseImageUrlValid(imageUrl: string): boolean {
 	const regexExp = /^(?:https?:\/\/)?(?:[\w]+\.)(?:\.?[\w]{2,})(\/[\w]*)*(\.[\w]+)*/;
 
