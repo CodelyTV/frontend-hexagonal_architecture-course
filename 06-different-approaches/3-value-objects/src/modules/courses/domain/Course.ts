@@ -1,11 +1,15 @@
-import { CourseIdNotValidError, isCourseIdValid } from "./CourseId";
-import { CourseImageUrlNotValidError, isCourseImageUrlValid } from "./CourseImageUrl";
-import { CourseTitleNotValidError, isCourseTitleValid } from "./CourseTitle";
+import { CourseId, CourseIdNotValidError, isCourseIdValid } from "./CourseId";
+import {
+	CourseImageUrl,
+	CourseImageUrlNotValidError,
+	isCourseImageUrlValid,
+} from "./CourseImageUrl";
+import { CourseTitle, CourseTitleNotValidError, isCourseTitleValid } from "./CourseTitle";
 
 export interface Course {
-	id: string;
-	title: string;
-	imageUrl: string;
+	id: CourseId;
+	title: CourseTitle;
+	imageUrl: CourseImageUrl;
 }
 
 export function ensureCourseIsValid({ id, title, imageUrl }: Course): void {
