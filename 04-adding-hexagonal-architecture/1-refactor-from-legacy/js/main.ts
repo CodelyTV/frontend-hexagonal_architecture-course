@@ -3,6 +3,11 @@ import "../css/custom.css";
 
 import $ from "jquery";
 import { v4 as uuidv4 } from "uuid";
+import { createLocalStorageCourseRepository } from "./infrastructure/LocalStorageCourseRepository";
+import { getAllCourses } from "./application/get-all/getAllCourses";
+import { createCourse } from "./application/create/createCourse";
+
+const repository = createLocalStorageCourseRepository();
 
 function isTitleValid(value) {
   var isValid = value.length > 5 && value.length <= 100;
@@ -17,20 +22,8 @@ function isImageUrlValid(value) {
   return isValid;
 }
 
-function getAllCoursesFromLocalStorage() {
-  var courses = localStorage.getItem("courses");
-
-  if (courses === null) {
-    return new Map();
-  }
-
-  var map = new Map(JSON.parse(courses));
-
-  return map;
-}
-
-function displayCourses() {
-  var courses = getAllCoursesFromLocalStorage();
+async function displayCourses() {
+  var courses = await getAllCourses(repository);
   $("#coursesList").empty();
   courses.forEach(function (course) {
     $("#coursesList").append(`<div class="courseCard">
@@ -45,7 +38,7 @@ $(function () {
 
   $("#title").on("blur", function (ev) {
     var errorMessage = $("#titleError");
-    var value = ev.target.value;
+    var value = (ev.target as HTMLInputElement).value;
     var isValid = isTitleValid(value);
 
     if (!isValid) {
@@ -61,7 +54,7 @@ $(function () {
 
   $("#imageUrl").on("blur", function (ev) {
     var errorMessage = $("#imageUrlError");
-    var value = ev.target.value;
+    var value = (ev.target as HTMLInputElement).value;
     var isValid = isImageUrlValid(value);
 
     if (!isValid) {
@@ -77,10 +70,9 @@ $(function () {
   $("#createCourseForm").on("submit", function (ev) {
     ev.preventDefault();
 
-    var title = ev.target.elements.title.value;
-    var imageUrl = ev.target.elements.imageUrl.value;
+    var title = (ev.target as any).elements.title.value;
+    var imageUrl = (ev.target as any).elements.imageUrl.value;
 
-    console.log(title);
     if (!isTitleValid(title)) {
       throw new Error("Title is not valid");
     }
@@ -89,19 +81,13 @@ $(function () {
       throw new Error("Image URL is not valid");
     }
 
-    var courses = getAllCoursesFromLocalStorage();
-    var id = uuidv4();
-
-    courses.set(id, {
-      id,
+    const course = {
+      id: uuidv4(),
       title,
       imageUrl,
-    });
+    }
 
-    localStorage.setItem(
-      "courses",
-      JSON.stringify(Array.from(courses.entries()))
-    );
+    createCourse(repository, course)
 
     $("#createCourseForm").hide();
     $("#createCourseSuccess").show();
