@@ -6,21 +6,10 @@ import { v4 as uuidv4 } from "uuid";
 import { createLocalStorageCourseRepository } from "./infrastructure/LocalStorageCourseRepository";
 import { getAllCourses } from "./application/get-all/getAllCourses";
 import { createCourse } from "./application/create/createCourse";
+import { isCourseTitleValid } from "./domain/CourseTitle";
+import { isCourseImageUrlValid } from "./domain/CourseImageUrl";
 
 const repository = createLocalStorageCourseRepository();
-
-function isTitleValid(value) {
-  var isValid = value.length > 5 && value.length <= 100;
-
-  return isValid;
-}
-
-function isImageUrlValid(value) {
-  var regexExp = /^(?:https?:\/\/)?(?:[\w]+\.)(?:\.?[\w]{2,})(\/[\w]*)*(\.[\w]+)*/;
-  var isValid = regexExp.test(value);
-
-  return isValid;
-}
 
 async function displayCourses() {
   var courses = await getAllCourses(repository);
@@ -39,7 +28,7 @@ $(function () {
   $("#title").on("blur", function (ev) {
     var errorMessage = $("#titleError");
     var value = (ev.target as HTMLInputElement).value;
-    var isValid = isTitleValid(value);
+    var isValid = isCourseTitleValid(value);
 
     if (!isValid) {
       errorMessage.show();
@@ -55,7 +44,7 @@ $(function () {
   $("#imageUrl").on("blur", function (ev) {
     var errorMessage = $("#imageUrlError");
     var value = (ev.target as HTMLInputElement).value;
-    var isValid = isImageUrlValid(value);
+    var isValid = isCourseImageUrlValid(value);
 
     if (!isValid) {
       errorMessage.show();
@@ -72,14 +61,6 @@ $(function () {
 
     var title = (ev.target as any).elements.title.value;
     var imageUrl = (ev.target as any).elements.imageUrl.value;
-
-    if (!isTitleValid(title)) {
-      throw new Error("Title is not valid");
-    }
-
-    if (!isImageUrlValid(imageUrl)) {
-      throw new Error("Image URL is not valid");
-    }
 
     const course = {
       id: uuidv4(),
