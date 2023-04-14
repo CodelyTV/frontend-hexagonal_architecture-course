@@ -1,7 +1,7 @@
 import { Course } from "../domain/Course";
 import { CourseRepository } from "../domain/CourseRepository";
 
-export function createLocalStorageCourseRepository(): CourseRepository {
+export function createApiCourseRepository(): CourseRepository {
 	return {
 		save,
 		get,
