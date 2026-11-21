@@ -1,6 +1,6 @@
 module.exports = {
 	root: true,
-	ignorePatterns: ["api/"],
+	ignorePatterns: ["/api/"],
 	extends: ["react-app", "eslint-config-codely/typescript"],
 	plugins: ["hexagonal-architecture"],
 	settings: {
