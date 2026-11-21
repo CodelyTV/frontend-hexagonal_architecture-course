@@ -1,5 +1,6 @@
 module.exports = {
 	root: true,
+	ignorePatterns: ["/api/"],
 	extends: ["react-app", "eslint-config-codely/typescript"],
 	plugins: ["hexagonal-architecture"],
 	settings: {
@@ -22,7 +23,7 @@ module.exports = {
 		},
 		{
 			files: ["**/tests/sections/**/*.spec.tsx"],
-			plugins: ["react-app/jest"],
+			extends: ["react-app/jest"],
 		},
 		{
 			files: ["**/tests/e2e-integration/**/*.spec.ts"],
