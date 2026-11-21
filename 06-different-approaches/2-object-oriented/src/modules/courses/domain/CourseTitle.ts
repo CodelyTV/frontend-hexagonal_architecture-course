@@ -8,7 +8,7 @@ export class CourseTitle {
 	}
 
 	public static isValid(value: string): boolean {
-		return value.length > CourseTitle.MAX_COURSE_LENGTH;
+		return value.length <= CourseTitle.MAX_COURSE_LENGTH;
 	}
 
 	public static invalidMessage(value: string): string {
